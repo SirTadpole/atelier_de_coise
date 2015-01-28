@@ -1,3 +1,8 @@
+atelier_site_front:
+    resource: "@AtelierSiteFrontBundle/Controller/"
+    type:     annotation
+    prefix:   /
+
 app:
     resource: @AppBundle/Controller/
     type:     annotation
