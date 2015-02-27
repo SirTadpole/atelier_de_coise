@@ -50,7 +50,7 @@ class Album
     private $isEnable;
 
     /**
-     * @ORM\OneToMany(targetEntity="PhotoAlbum", mappedBy="album", cascade={"remove","persist"} )
+     * @ORM\OneToMany(targetEntity="Photo", mappedBy="album", cascade={"remove","persist"} )
      */
     protected $photos;
 

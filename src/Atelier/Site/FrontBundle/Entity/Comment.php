@@ -31,9 +31,9 @@ class Comment
     /**
      * @var string
      *
-     * @ORM\Column(name="authorName", type="string", length=255)
+     * @ORM\Column(name="author", type="string", length=255)
      */
-    private $authorName;
+    private $author;
 
     /**
      * @var string
@@ -52,10 +52,15 @@ class Comment
     /**
      * @var boolean
      *
-     * @ORM\Column(name="isEnable", type="boolean")
+     * @ORM\Column(name="is_enable", type="boolean")
      */
     private $isEnable;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="Article", inversedBy="comments", cascade={"remove"})
+     * @ORM\JoinColumn(name="article_id", referencedColumnName="id")
+     */
+    protected $article;
 
     /**
      * Get id
@@ -91,26 +96,26 @@ class Comment
     }
 
     /**
-     * Set authorName
+     * Set author
      *
-     * @param string $authorName
+     * @param string $author
      * @return Comment
      */
-    public function setAuthorName($authorName)
+    public function setAuthor($author)
     {
-        $this->authorName = $authorName;
+        $this->author = $author;
 
         return $this;
     }
 
     /**
-     * Get authorName
+     * Get author
      *
      * @return string 
      */
-    public function getAuthorName()
+    public function getAuthor()
     {
-        return $this->authorName;
+        return $this->author;
     }
 
     /**
@@ -180,5 +185,28 @@ class Comment
     public function getIsEnable()
     {
         return $this->isEnable;
+    }
+
+    /**
+     * Set article
+     *
+     * @param \Atelier\Site\FrontBundle\Entity\Article $article
+     * @return Comment
+     */
+    public function setArticle(\Atelier\Site\FrontBundle\Entity\Article $article = null)
+    {
+        $this->article = $article;
+
+        return $this;
+    }
+
+    /**
+     * Get article
+     *
+     * @return \Atelier\Site\FrontBundle\Entity\Article 
+     */
+    public function getArticle()
+    {
+        return $this->article;
     }
 }

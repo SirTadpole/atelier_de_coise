@@ -72,6 +72,23 @@ class Article
     private $isEnabled;
 
     /**
+     * @ORM\OneToOne(targetEntity="Photo")
+     * @ORM\JoinColumn(name="photo_id", referencedColumnName="id")
+     */
+    private $photo;
+
+    /**
+     * @ORM\OneToMany(targetEntity="Comment", mappedBy="desk", cascade={"remove", "persist"})
+     */
+    protected $comments;
+
+    /**
+     * @ORM\OneToOne(targetEntity="Event")
+     * @ORM\JoinColumn(name="event_id", referencedColumnName="id")
+     */
+    private $event;
+
+    /**
     * Constructor
     */
     public function __construct()
@@ -249,5 +266,84 @@ class Article
     public function getIsEnabled()
     {
         return $this->isEnabled;
+    }
+
+    /**
+     * Set photo
+     *
+     * @param \Atelier\Site\FrontBundle\Entity\Photo $photo
+     * @return Article
+     */
+    public function setPhoto(\Atelier\Site\FrontBundle\Entity\Photo $photo = null)
+    {
+        $this->photo = $photo;
+
+        return $this;
+    }
+
+    /**
+     * Get photo
+     *
+     * @return \Atelier\Site\FrontBundle\Entity\Photo 
+     */
+    public function getPhoto()
+    {
+        return $this->photo;
+    }
+
+    /**
+     * Add comments
+     *
+     * @param \Atelier\Site\FrontBundle\Entity\Comment $comments
+     * @return Article
+     */
+    public function addComment(\Atelier\Site\FrontBundle\Entity\Comment $comments)
+    {
+        $this->comments[] = $comments;
+
+        return $this;
+    }
+
+    /**
+     * Remove comments
+     *
+     * @param \Atelier\Site\FrontBundle\Entity\Comment $comments
+     */
+    public function removeComment(\Atelier\Site\FrontBundle\Entity\Comment $comments)
+    {
+        $this->comments->removeElement($comments);
+    }
+
+    /**
+     * Get comments
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getComments()
+    {
+        return $this->comments;
+    }
+
+    /**
+     * Set event
+     *
+     * @param \Atelier\Site\FrontBundle\Entity\Event $event
+     * @return Article
+     */
+    public function setEvent(\Atelier\Site\FrontBundle\Entity\Event $event = null)
+    {
+        $this->event = $event;
+
+        return $this;
+    }
+
+    /**
+     * Get event
+     *
+     * @return \Atelier\Site\FrontBundle\Entity\Event 
+     */
+    public function getEvent()
+    {
+        return $this->event;
     }
 }

@@ -14,6 +14,8 @@ class FrontController extends Controller
    */
   public function indexAction()
   {
+    $last_article = array();
+
     return array();
   }
 }

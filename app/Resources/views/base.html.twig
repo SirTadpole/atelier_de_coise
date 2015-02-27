@@ -7,7 +7,19 @@
         <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
     </head>
     <body>
-        {% block body %}{% endblock %}
+
+        <div class="header">
+            Atelier de coise !!!!
+        </div>
+
+        <div class="content">
+            {% block body %}{% endblock %}
+        </div>
+
+        <div class="footer">
+            2015 @Jimmy_Tadpole production
+        </div>
+
         {% block javascripts %}{% endblock %}
     </body>
 </html>
