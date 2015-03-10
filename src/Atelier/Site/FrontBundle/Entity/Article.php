@@ -72,12 +72,6 @@ class Article
     private $isEnabled;
 
     /**
-     * @ORM\OneToOne(targetEntity="Photo")
-     * @ORM\JoinColumn(name="photo_id", referencedColumnName="id")
-     */
-    private $photo;
-
-    /**
      * @ORM\OneToMany(targetEntity="Comment", mappedBy="desk", cascade={"remove", "persist"})
      */
     protected $comments;
@@ -266,29 +260,6 @@ class Article
     public function getIsEnabled()
     {
         return $this->isEnabled;
-    }
-
-    /**
-     * Set photo
-     *
-     * @param \Atelier\Site\FrontBundle\Entity\Photo $photo
-     * @return Article
-     */
-    public function setPhoto(\Atelier\Site\FrontBundle\Entity\Photo $photo = null)
-    {
-        $this->photo = $photo;
-
-        return $this;
-    }
-
-    /**
-     * Get photo
-     *
-     * @return \Atelier\Site\FrontBundle\Entity\Photo 
-     */
-    public function getPhoto()
-    {
-        return $this->photo;
     }
 
     /**
