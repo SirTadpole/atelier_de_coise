@@ -35,6 +35,12 @@ class Event
      */
     private $localisation;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="Article", inversedBy="events", cascade={"remove"})
+     * @ORM\JoinColumn(name="article_id", referencedColumnName="id")
+     */
+    protected $article;
+
 
     /**
      * Get id
@@ -90,5 +96,28 @@ class Event
     public function getLocalisation()
     {
         return $this->localisation;
+    }
+
+    /**
+     * Set article
+     *
+     * @param \Atelier\Site\FrontBundle\Entity\Article $article
+     * @return Event
+     */
+    public function setArticle(\Atelier\Site\FrontBundle\Entity\Article $article = null)
+    {
+        $this->article = $article;
+
+        return $this;
+    }
+
+    /**
+     * Get article
+     *
+     * @return \Atelier\Site\FrontBundle\Entity\Article 
+     */
+    public function getArticle()
+    {
+        return $this->article;
     }
 }

@@ -77,10 +77,31 @@ class Article
     protected $comments;
 
     /**
-     * @ORM\OneToOne(targetEntity="Event")
-     * @ORM\JoinColumn(name="event_id", referencedColumnName="id")
+     * @ORM\OneToMany(targetEntity="Event", mappedBy="article", cascade={"remove", "persist"})
+     * @ORM\JoinColumn(name="events_id", referencedColumnName="id", nullable=true)
      */
-    private $event;
+    private $events;
+
+    /**
+     * @var \Application\Sonata\MediaBundle\Entity\Media
+     * @ORM\ManyToOne(targetEntity="Application\Sonata\MediaBundle\Entity\Media", cascade={"persist"}, fetch="LAZY")
+     * @ORM\JoinColumn(name="media_pict_id", referencedColumnName="id", nullable=true)
+     */
+    protected $media_pict;
+
+    /**
+     * @var \Application\Sonata\MediaBundle\Entity\Media
+     * @ORM\ManyToOne(targetEntity="Application\Sonata\MediaBundle\Entity\Media", cascade={"persist"}, fetch="LAZY")
+     * @ORM\JoinColumn(name="media_video_id", referencedColumnName="id", nullable=true)
+     */
+    protected $media_video;
+
+    /**
+     * @var \Application\Sonata\MediaBundle\Entity\Media
+     * @ORM\ManyToOne(targetEntity="Application\Sonata\MediaBundle\Entity\Media", cascade={"persist"}, fetch="LAZY")
+     * @ORM\JoinColumn(name="media_file_id", referencedColumnName="id", nullable=true)
+     */
+    protected $media_file;
 
     /**
     * Constructor
@@ -316,5 +337,123 @@ class Article
     public function getEvent()
     {
         return $this->event;
+    }
+
+    /**
+     * @param MediaInterface $media
+     */
+    public function setMedia(MediaInterface $media)
+    {
+      $this->media = $media;
+    }
+
+    /**
+     * @return MediaInterface
+     */
+    public function getMedia()
+    {
+      return $this->media;
+    }
+
+    /**
+     * Add events
+     *
+     * @param \Atelier\Site\FrontBundle\Entity\Event $events
+     * @return Article
+     */
+    public function addEvent(\Atelier\Site\FrontBundle\Entity\Event $events)
+    {
+        $this->events[] = $events;
+
+        return $this;
+    }
+
+    /**
+     * Remove events
+     *
+     * @param \Atelier\Site\FrontBundle\Entity\Event $events
+     */
+    public function removeEvent(\Atelier\Site\FrontBundle\Entity\Event $events)
+    {
+        $this->events->removeElement($events);
+    }
+
+    /**
+     * Get events
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getEvents()
+    {
+        return $this->events;
+    }
+
+    /**
+     * Set media_pict
+     *
+     * @param \Application\Sonata\MediaBundle\Entity\Media $mediaPict
+     * @return Article
+     */
+    public function setMediaPict(\Application\Sonata\MediaBundle\Entity\Media $mediaPict = null)
+    {
+        $this->media_pict = $mediaPict;
+
+        return $this;
+    }
+
+    /**
+     * Get media_pict
+     *
+     * @return \Application\Sonata\MediaBundle\Entity\Media 
+     */
+    public function getMediaPict()
+    {
+        return $this->media_pict;
+    }
+
+    /**
+     * Set media_video
+     *
+     * @param \Application\Sonata\MediaBundle\Entity\Media $mediaVideo
+     * @return Article
+     */
+    public function setMediaVideo(\Application\Sonata\MediaBundle\Entity\Media $mediaVideo = null)
+    {
+        $this->media_video = $mediaVideo;
+
+        return $this;
+    }
+
+    /**
+     * Get media_video
+     *
+     * @return \Application\Sonata\MediaBundle\Entity\Media 
+     */
+    public function getMediaVideo()
+    {
+        return $this->media_video;
+    }
+
+    /**
+     * Set media_file
+     *
+     * @param \Application\Sonata\MediaBundle\Entity\Media $mediaFile
+     * @return Article
+     */
+    public function setMediaFile(\Application\Sonata\MediaBundle\Entity\Media $mediaFile = null)
+    {
+        $this->media_file = $mediaFile;
+
+        return $this;
+    }
+
+    /**
+     * Get media_file
+     *
+     * @return \Application\Sonata\MediaBundle\Entity\Media 
+     */
+    public function getMediaFile()
+    {
+        return $this->media_file;
     }
 }
